@@ -42,17 +42,19 @@ class H(http.server.BaseHTTPRequestHandler):
 
         # 根路径：显示状态页面
         elif self.path == '/' or self.path == '':
-            html = f'''<!DOCTYPE html>
+            port_str = str(PORT)
+            proxy_url = os.environ.get('RENDER_EXTERNAL_URL', 'http://localhost:' + port_str)
+            html = '''<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>世界杯竞彩代理</title>
 <style>body{font-family:sans-serif;max-width:600px;margin:40px auto;padding:20px;background:#1a1f35;color:#e4e8ee}
 h1{color:#f0c060}p{color:#8899bb;line-height:1.8}code{background:#0d1225;padding:4px 10px;border-radius:6px;color:#fbbf24}
 .ok{color:#10b981;font-weight:bold}</style></head>
 <body>
-<h1>⚽ 世界杯竞彩数据代理</h1>
-<p class="ok">✅ 代理服务运行正常 (端口 {PORT})</p>
+<h1>&#9917; 世界杯竞彩数据代理</h1>
+<p class="ok">&#10004; 代理服务运行正常 (端口 ''' + port_str + ''')</p>
 <p>此服务为 <strong>2026世界杯竞彩智能分析</strong> 提供CORS代理，转发500.com竞彩数据。</p>
 <p>使用方法：在前端「模型管理」页面的「代理服务器配置」中填入：</p>
-<p><code>{os.environ.get('RENDER_EXTERNAL_URL', f'http://localhost:{PORT}')}</code></p>
+<p><code>''' + proxy_url + '''</code></p>
 <p style="color:#6b7280;font-size:12px;margin-top:20px">仅代理转发HTTP请求，不做任何数据存储或业务逻辑处理。</p>
 </body></html>'''
             self.send_response(200)
