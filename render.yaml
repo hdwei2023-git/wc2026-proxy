@@ -1,0 +1,7 @@
+build:
+  # 无需构建步骤（纯Python标准库）
+  command: echo "No build required"
+run:
+  command: python proxy.py
+  env:
+    PORT: 10000
