@@ -1,7 +1,12 @@
-build:
-  # 无需构建步骤（纯Python标准库）
-  command: echo "No build required"
-run:
-  command: python proxy.py
-  env:
-    PORT: 10000
+services:
+  - type: web_service
+    name: wc2026-proxy
+    runtime: python
+    repo: https://github.com/hdwei2023-git/wc2026-proxy
+    branch: main
+    buildCommand: pip install -r requirements.txt || true
+    startCommand: python proxy.py
+    plan: free
+    envVars:
+      - key: PORT
+        value: 10000
